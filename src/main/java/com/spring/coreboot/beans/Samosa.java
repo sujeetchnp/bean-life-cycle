@@ -16,12 +16,16 @@ package com.spring.coreboot.beans;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 @Component
-public class Samosa {
+@Scope("prototype")
+public class Samosa implements BeanPostProcessor {
 
     private LocalDate localDate;
     private Scanner scanner;
@@ -57,4 +61,21 @@ public class Samosa {
         this.scanner.close();
         System.out.println("Scanner is closed");
     }
+
+//    @Override
+//    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+//        if (bean instanceof Samosa) {
+//            System.out.println("pre init method is called - Samosa bean");
+//        }
+//
+//        return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
+//    }
+//
+//    @Override
+//    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+//        if (bean instanceof Samosa) {
+//            System.out.println("post init method is called - Samosa bean");
+//        }
+//        return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
+//    }
 }

@@ -45,6 +45,10 @@ public class CoreBootApplication {
 		System.out.println(samosaBean);
 		samosaBean.eat();
 
+		Samosa samosaBean2 = context.getBean(Samosa.class);
+		System.out.println(samosaBean2);
+		samosaBean2.eat();
+
 	}
 
 }
