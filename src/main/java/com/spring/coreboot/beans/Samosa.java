@@ -1,11 +1,22 @@
+/**
+ *
+ * Bean life cycle: IOC container started --> bean instantiation -> Dependencies injection
+ *          --> Custom init logic (by interfaces like initialization and by annotation like PreDestroy) --> Bean is ready to use (all logic)
+ *          --> Destroy (like @PreDestroy)
+ *
+ *
+ * Interview Questions:
+ *  Q. In initialization phase (custom init logic) : Is there any way we can write code logic and after initialization phase?
+ *      Answer:  Yes, there is a way. Before : we called that pre-initialization and After: we called post-initialization
+ *
+ */
+
+
 package com.spring.coreboot.beans;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -21,7 +32,7 @@ public class Samosa {
     }
 
     @PostConstruct
-    public void init() throws Exception {
+    public void init() {
         this.localDate = LocalDate.now();
         System.out.println("date is set to: " +localDate);
         this.scanner=new Scanner(System.in);
@@ -39,7 +50,7 @@ public class Samosa {
     }
 
     @PreDestroy
-    public void destroy() throws Exception {
+    public void destroy() {
         System.out.println("destroying samosa bean");
         this.localDate=null;
         System.out.println("date is set to: " +localDate);
